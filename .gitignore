@@ -1,0 +1,6 @@
+target/
+logs/
+.dsh/
+.idea/
+*.iml
+*.log

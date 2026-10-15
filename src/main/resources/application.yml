@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: canal-binlog-demo
+  datasource:
+    # 宿主机端口 3307 -> 容器内 3306
+    url: jdbc:mysql://localhost:3307/canal_demo?useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+canal:
+  # 本机直跑的 canal-server
+  host: 127.0.0.1
+  port: 11111
+  destination: example
+  # canal-server 未开启账号校验时留空即可
+  username: ""
+  password: ""
+  # 订阅过滤：只回调 canal_demo 库的变更（单引号保证反斜杠原样传递）
+  subscribe: 'canal_demo\..*'
+  batch-size: 100
+  # 启动时自动插一条演示数据，用于直接观察回调链路
+  auto-insert-demo-row: true
+
+logging:
+  level:
+    com.example.canaldemo: info
